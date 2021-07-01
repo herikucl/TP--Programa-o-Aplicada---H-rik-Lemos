@@ -29,10 +29,15 @@ struct tInvestimento{
 class No{
   public:
   int v;
+  tInvestimento invest;
   No* prox;
 
   No(int e){
     this->v=e;
+    this->prox=NULL;
+  }
+  No(tInvestimento t){
+    this->invest=t;
     this->prox=NULL;
   }
   void DefinirProx(No* p){
@@ -47,38 +52,62 @@ class No{
 };
 
 class ListaEncadeada{
-public:
-No* primeiro;
-No* ultimo;
+  ofstream saida;
+  public:
+  No* primeiro;
+  No* ultimo;
 
-ListaEncadeada(){
-  primeiro=ultimo=NULL;
-}
-bool Vazia(){
-  return (primeiro==NULL);
-}
-void NovoElemento(int vv){
-  No* novo = new No(vv);
-  if(Vazia()){
-    primeiro=ultimo=novo;
-  }else{
-    ultimo->DefinirProx(novo);
-    ultimo=novo;
+
+  ListaEncadeada(){
+    primeiro=ultimo=NULL;
   }
-}
-void NovoElemento(float vv){
-  No* novo = new No(vv);
-  if(Vazia()){
-    primeiro=ultimo=novo;
-  }else{
-    ultimo->DefinirProx(novo);
-    ultimo=novo;
+  bool Vazia(){
+    return (primeiro==NULL);
   }
+  void NovoElemento(float vv){
+    No* novo = new No(vv);
+    if(Vazia()){
+      primeiro=ultimo=novo;
+    }else{
+      ultimo->DefinirProx(novo);
+      ultimo=novo;
+    }
+  }
+  void NovoElemento(tInvestimento t){
+    No* novo = new No(t);
+    if(Vazia()){
+      primeiro=ultimo=novo;
+    }else{
+      ultimo->DefinirProx(novo);
+      ultimo=novo;
+    }
+  }
+
+  int tamanhoLista(){
+    if(Vazia()){
+      return 0;
+    }
+    No* i = primeiro;
+    int tamanho =0;
+    do{
+      i=i->getProx();
+      tamanho++;
+    }while(i);
+    return tamanho;
+  }
+
+    void ExportarDados(){
+      No* bd = primeiro;  
+      saida.open("bd.txt",ios::out);
+      for(int i=0;i<tamanhoLista();i++){
+      saida<<bd->getValor();
+      bd->getProx();
+      }
+    }  
 };
 
 
 int main() {
-  ofstream saida;
   ifstream entrada;
   string verificador;
   char resp1;
@@ -97,8 +126,14 @@ int main() {
         cin>>aux;
         lista.NovoElemento(aux);
       }
+      cout<<"Dados registrados com sucesso"<<endl;
+      lista.ExportarDados();
+    }else if (resp1=='l'){
+      entrada.open("bd.txt",ios::in);
+      while(!entrada.eof()){
+        
+      }
     }
-
   }
 
 
