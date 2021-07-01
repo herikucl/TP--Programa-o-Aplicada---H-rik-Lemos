@@ -65,6 +65,9 @@ class No{
   float getValor(){
     return v;
   }
+  void getValorI(){
+    cout<<invest.getMontante()<<" "<<invest.getPeriodo()<<" "<<invest.getJurosAN()<<endl;
+  }
   No* getProx(){
     return prox;
   }
@@ -123,20 +126,26 @@ class ListaEncadeada{
       bd=bd->getProx();
       }
       saida.close();
-    }  
+    } 
+    void Impressão(){
+      No* bd = primeiro;  
+      for(int i=0;i<tamanhoLista();i++){
+      bd->getValorI();
+      bd=bd->getProx();
+      }
+    } 
 };
 
 
 int main() {
   ifstream entrada;
-  string verificador;
+  string verificador="sim";
   char resp1;
-  int qntG,i;
+  int qntG,i=0;
   float aux;
   ListaEncadeada lista;
-  ListaEncadeada listaS;
 
-  while(verificador!="sim"){
+  while(verificador=="sim"){
     cout<<"Deseja gravar ou ler no banco de dados? Gravar [g] / Ler [l]"<<endl;
     cin>>resp1;
     if(resp1=='g'){
@@ -150,17 +159,30 @@ int main() {
       cout<<"Dados registrados com sucesso"<<endl;
       lista.ExportarDados();
     }else if (resp1=='l'){
+      
+      tInvestimento inv;
+      ListaEncadeada listaS;
+      i=0;
       entrada.open("bd.txt",ios::in);
       while(!entrada.eof()){
-        
-        tInvestimento inv;
+        i++;
+        if(i==4){
+          i=1;
+          listaS.NovoElemento(inv);
+        }
         entrada>>aux;
-        inv.
-
+        if(i==1){
+        inv.setMontante(aux);
+        }else if(i==2){
+        inv.setPeriodo(aux);
+        }else{
+        inv.setJurosAN(aux);
+        }
       }
       entrada.close();
+      listaS.Impressão();
     }
+    cout<<"Deseja continuar no programa?"<<endl;
+    cin>>verificador;
   }
-
-
 }
