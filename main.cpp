@@ -28,11 +28,11 @@ struct tInvestimento{
 
 class No{
   public:
-  int v;
+  float v;
   tInvestimento invest;
   No* prox;
 
-  No(int e){
+  No(float e){
     this->v=e;
     this->prox=NULL;
   }
@@ -43,7 +43,7 @@ class No{
   void DefinirProx(No* p){
     prox=p;
   }
-  int getValor(){
+  float getValor(){
     return v;
   }
   No* getProx(){
@@ -100,9 +100,10 @@ class ListaEncadeada{
       No* bd = primeiro;  
       saida.open("bd.txt",ios::out);
       for(int i=0;i<tamanhoLista();i++){
-      saida<<bd->getValor();
-      bd->getProx();
+      saida<<bd->getValor()<<endl;
+      bd=bd->getProx();
       }
+      saida.close();
     }  
 };
 
@@ -131,7 +132,7 @@ int main() {
     }else if (resp1=='l'){
       entrada.open("bd.txt",ios::in);
       while(!entrada.eof()){
-        
+        entrada>>aux;
       }
     }
   }
