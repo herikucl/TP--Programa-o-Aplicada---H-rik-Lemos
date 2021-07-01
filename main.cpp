@@ -6,13 +6,32 @@ using namespace std;
 struct tInvestimento{
   float Montante,JurosAno,Periodo;
 
+    void setMontante(float m){
+      Montante=m;
+    }
+    void setPeriodo(float p){
+      Periodo=p;
+    }
+    void setJurosAN(float an){
+      JurosAno=an;
+    }
+    float getMontante(){
+      return Montante;
+    }
+    float getPeriodo(){
+      return Periodo;
+    }
+    float getJurosAN(){
+      return JurosAno;
+    }
+    
+
     float MontanteFinalJS(float p){
     return (Montante*JurosAno*p)+Montante;
     }
     float MontanteFinalJS(){
     return (Montante*JurosAno*Periodo)+Montante;
     }
-
 
     float MontanteFinalJC(float p){
     return Montante*pow((1+JurosAno),p);
@@ -112,9 +131,10 @@ int main() {
   ifstream entrada;
   string verificador;
   char resp1;
-  int qntG;
+  int qntG,i;
   float aux;
   ListaEncadeada lista;
+  ListaEncadeada listaS;
 
   while(verificador!="sim"){
     cout<<"Deseja gravar ou ler no banco de dados? Gravar [g] / Ler [l]"<<endl;
@@ -132,8 +152,13 @@ int main() {
     }else if (resp1=='l'){
       entrada.open("bd.txt",ios::in);
       while(!entrada.eof()){
+        
+        tInvestimento inv;
         entrada>>aux;
+        inv.
+
       }
+      entrada.close();
     }
   }
 
