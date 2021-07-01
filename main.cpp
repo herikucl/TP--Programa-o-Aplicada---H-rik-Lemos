@@ -27,6 +27,27 @@ struct tInvestimento{
     }
 };
 
+class No{
+  public:
+  int v;
+  No* prox;
+
+  No(int e){
+    this->v=e;
+    this->prox=NULL;
+  }
+  void DefinirProx(No* p){
+    prox=p;
+  }
+  int getValor(){
+    return v;
+  }
+  No* getProx(){
+    return prox;
+  }
+};
+
+
 int main() {
   ofstream saida;
   ifstream entrada;
@@ -40,7 +61,7 @@ int main() {
     if(resp1=='g'){
       cout<<"Quantos elementos deseja gravar?"<<endl;
       cin>>qntG;
-      
+
     }
 
   }
