@@ -47,6 +47,29 @@ class No{
   }
 };
 
+class ListaEncadeada{
+public:
+No* primeiro;
+No* ultimo;
+
+ListaEncadeada(){
+  primeiro=ultimo=NULL;
+}
+bool Vazia(){
+  return (primeiro==NULL);
+}
+void NovoElemento(int vv){
+  No* novo = new No(vv);
+  if(Vazia()){
+    primeiro=ultimo=novo;
+  }else{
+    ultimo->DefinirProx(novo);
+    ultimo=novo;
+  } 
+}
+
+};
+
 
 int main() {
   ofstream saida;
