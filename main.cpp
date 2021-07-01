@@ -4,10 +4,9 @@
 using namespace std;
 
 struct tInvestimento{
-  int Periodo;
-  float Montante,JurosAno;
+  float Montante,JurosAno,Periodo;
 
-    float MontanteFinalJS(int p){
+    float MontanteFinalJS(float p){
     return (Montante*JurosAno*p)+Montante;
     }
     float MontanteFinalJS(){
@@ -15,7 +14,7 @@ struct tInvestimento{
     }
 
 
-    float MontanteFinalJC(int p){
+    float MontanteFinalJC(float p){
     return Montante*pow((1+JurosAno),p);
     }
     float MontanteFinalJC(){
@@ -65,9 +64,16 @@ void NovoElemento(int vv){
   }else{
     ultimo->DefinirProx(novo);
     ultimo=novo;
-  } 
+  }
 }
-
+void NovoElemento(float vv){
+  No* novo = new No(vv);
+  if(Vazia()){
+    primeiro=ultimo=novo;
+  }else{
+    ultimo->DefinirProx(novo);
+    ultimo=novo;
+  }
 };
 
 
@@ -77,6 +83,8 @@ int main() {
   string verificador;
   char resp1;
   int qntG;
+  float aux;
+  ListaEncadeada lista;
 
   while(verificador!="sim"){
     cout<<"Deseja gravar ou ler no banco de dados? Gravar [g] / Ler [l]"<<endl;
@@ -84,7 +92,11 @@ int main() {
     if(resp1=='g'){
       cout<<"Quantos elementos deseja gravar?"<<endl;
       cin>>qntG;
-
+      cout<<"Digite o Montante,Periodo e Juros anuais respectivamente"<<endl;
+      for(int i=0; i<qntG*3;i++){
+        cin>>aux;
+        lista.NovoElemento(aux);
+      }
     }
 
   }
