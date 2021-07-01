@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <math.h>
 using namespace std;
 
@@ -27,5 +28,22 @@ struct tInvestimento{
 };
 
 int main() {
-  
+  ofstream saida;
+  ifstream entrada;
+  string verificador;
+  char resp1;
+  int qntG;
+
+  while(verificador!="sim"){
+    cout<<"Deseja gravar ou ler no banco de dados? Gravar [g] / Ler [l]"<<endl;
+    cin>>resp1;
+    if(resp1=='g'){
+      cout<<"Quantos elementos deseja gravar?"<<endl;
+      cin>>qntG;
+      
+    }
+
+  }
+
+
 }
