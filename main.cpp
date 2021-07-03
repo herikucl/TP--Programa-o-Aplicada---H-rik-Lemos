@@ -68,6 +68,10 @@ class No{
   void getValorI(){
     cout<<invest.getMontante()<<" "<<invest.getPeriodo()<<" "<<invest.getJurosAN()<<endl;
   }
+
+  tInvestimento getValorO(){
+    return invest;
+  }
   No* getProx(){
     return prox;
   }
@@ -104,7 +108,6 @@ class ListaEncadeada{
       ultimo=novo;
     }
   }
-
   int tamanhoLista(){
     if(Vazia()){
       return 0;
@@ -130,7 +133,10 @@ class ListaEncadeada{
     void Impressão(){
       No* bd = primeiro;  
       for(int i=0;i<tamanhoLista();i++){
-      bd->getValorI();
+      bd->getValorO();
+      cout<<"Conjunto "<<i+1<<"\nMontante: R$"<<(bd->getValorO()).getMontante()<<"\nPeriodo: "<<(bd->getValorO()).getPeriodo()<<" anos\nJuros anuais: "<<(bd->getValorO()).getJurosAN()<<"\nValor do montante ao final do Periodo por:"<<"\nJuros simples: "<<(bd->getValorO()).MontanteFinalJS()<<"\nJuros compostos: "<<(bd->getValorO()).MontanteFinalJC()<<"\nConversão de juros anuais para mensais: "<<(bd->getValorO()).ConversaoJanoJmes()<<endl;
+      cout<<"-------------------"<<endl;
+     
       bd=bd->getProx();
       }
     } 
@@ -139,13 +145,13 @@ class ListaEncadeada{
 
 int main() {
   ifstream entrada;
-  string verificador="sim";
-  char resp1;
+  char resp1,resp2='S';
   int qntG,i=0;
   float aux;
   ListaEncadeada lista;
+  ListaEncadeada listaS;
 
-  while(verificador=="sim"){
+  while(resp2=='S' || resp2 == 's'){
     cout<<"Deseja gravar ou ler no banco de dados? Gravar [g] / Ler [l]"<<endl;
     cin>>resp1;
     if(resp1=='g'){
@@ -159,9 +165,7 @@ int main() {
       cout<<"Dados registrados com sucesso"<<endl;
       lista.ExportarDados();
     }else if (resp1=='l'){
-      
       tInvestimento inv;
-      ListaEncadeada listaS;
       i=0;
       entrada.open("bd.txt",ios::in);
       while(!entrada.eof()){
@@ -182,7 +186,8 @@ int main() {
       entrada.close();
       listaS.Impressão();
     }
-    cout<<"Deseja continuar no programa?"<<endl;
-    cin>>verificador;
+
+    cout<<"Deseja continuar no programa? Sim[S] / Não[N]"<<endl;
+    cin>>resp2;
   }
 }
